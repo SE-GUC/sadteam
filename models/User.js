@@ -37,7 +37,7 @@ var userSchema = new mongoose.Schema({
 });
 
 //as a first parameter we will spicify the name of schema then we have the schema object
-mongoose.model('user', userSchema);
+mongoose.model('User', userSchema);
 
 
 
