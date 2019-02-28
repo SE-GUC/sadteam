@@ -7,7 +7,7 @@ const User = mongoose.model('User'); // **4** creating user object so i can inse
 
 //creating new router ('/' is the default url + the request handler function)
 //router.get('/', (req, res) => {
-///	res.json('Welcome to user page =)') //returing a response
+//	res.json('Welcome to user page =)') //returing a response
 //});
 
 router.get('/', (req, res) => {
@@ -42,8 +42,16 @@ function insertUser(req,res){
 	user.protofolio = req.body.protofolio;
 	user.save((err, doc) => {
 		if(!err)
-			res.redirect('../user/records'); // if no err while inserting, redirect to new route
-		else{
+			res.redirect('user/records'); // if no err while inserting, redirect to new route
+		else{ //for validation error 3
+			if(err.name =='ValidationError'){
+				handleValidationError(err, req.body);
+				res.render("user/addUser", {
+					viewTitle: "Insert User", 
+					user : req.body
+				});
+			}
+			else
 			console.log('Error while inserting user: ' + err);
 		}
 	});
@@ -51,7 +59,9 @@ function insertUser(req,res){
 
 //creating new route to show inserted user records
 router.get('/records', (req,res) => {
-	User.find().then(users => res.json(users));
+	User.find().
+	select('id firstName middleName lastName age birtDate email password educationalBackground Skills  portofolio') // selecting the attributes to be shown
+	.then(users => res.json(users));
 });
 
 router.route('/records/:email').get(function(req,res){
@@ -60,9 +70,11 @@ router.route('/records/:email').get(function(req,res){
 			res.status(404).send('data not found');
 		}
 		res.json(user[0]);
-	});
+	}).	select('id firstName middleName lastName age birtDate email password educationalBackground Skills  portofolio')
+	;
 	
 });
+// updating an existing account
 router.route('/update/:email').post(function(req, res) {
     User.find({email: req.params.email},function(err,user){
 		if(user.length==0){
@@ -83,10 +95,6 @@ router.route('/update/:email').post(function(req, res) {
             if(!req.body.age){
             }else{
                 user[0].age = req.body.age;
-            }
-            if(!req.body.address){
-            }else{
-                user[0].address = req.body.address;
             }
             if(!req.body.birthDate){
             }else{
@@ -130,6 +138,46 @@ router.route('/:email/remove').post(function(req, res) {
 	})
 }
 );
+//vaildation error msg saved in body
+function handleValidationError(err, body){
+	for(field in err.errors)
+	{
+		switch(err.erros[field].path){ //fields are firstName, middleName, lastName......
+			case 'firstName':
+				body['firstNameError'] = err.errors[field].message; //this field is required
+				break;
+			case 'middleName':
+				body['middleNameError'] = err.errors[field].message; //this field is required
+				break;
+			case 'lastName':
+				body['lastNameError'] = err.errors[field].message; //this field is required
+				break;
+			case 'age':
+				body['ageError'] = err.errors[field].message; //this field is required
+				break;
+			case 'birthDate':
+				body['birthDateError'] = err.errors[field].message; //this field is required
+				break;
+			case 'email':
+				body['emailError'] = err.errors[field].message; //this field is required
+				break;
+			case 'password':
+				body['passwordError'] = err.errors[field].message; //this field is required
+				break;
+			case 'educationalBackground':
+				body['educationalBackgroundError'] = err.errors[field].message; //this field is required
+				break;
+			case 'skills':
+				body['skillsError'] = err.errors[field].message; //this field is required
+				break;
+			case 'protofolio':
+				body['protofolioError'] = err.errors[field].message; //this field is required
+				break;
+			default:
+				break;
+		}
+	}
+}
 
 
 module.exports = router; //exporting this router object
