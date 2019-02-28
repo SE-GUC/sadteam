@@ -43,15 +43,7 @@ function insertUser(req,res){
 	user.save((err, doc) => {
 		if(!err)
 			res.redirect('user/records'); // if no err while inserting, redirect to new route
-		else{ //for validation error 3
-			if(err.name =='ValidationError'){
-				handleValidationError(err, req.body);
-				res.render("user/addUser", {
-					viewTitle: "Insert User", 
-					user : req.body
-				});
-			}
-			else
+		else{
 			console.log('Error while inserting user: ' + err);
 		}
 	});
@@ -61,48 +53,6 @@ function insertUser(req,res){
 router.get('/records', (req,res) => {
 	res.json('Users List =)');
 });
-
-//validation 4 
-//vaildation error msg saved in body
-function handleValidationError(err, body){
-	for(field in err.errors)
-	{
-		switch(err.erros[field].path){ //fields are firstName, middleName, lastName......
-			case 'firstName':
-				body['firstNameError'] = err.errors[field].message; //this field is required
-				break;
-			case 'middleName':
-				body['middleNameError'] = err.errors[field].message; //this field is required
-				break;
-			case 'lastName':
-				body['lastNameError'] = err.errors[field].message; //this field is required
-				break;
-			case 'age':
-				body['ageError'] = err.errors[field].message; //this field is required
-				break;
-			case 'birthDate':
-				body['birthDateError'] = err.errors[field].message; //this field is required
-				break;
-			case 'email':
-				body['emailError'] = err.errors[field].message; //this field is required
-				break;
-			case 'password':
-				body['passwordError'] = err.errors[field].message; //this field is required
-				break;
-			case 'educationalBackground':
-				body['educationalBackgroundError'] = err.errors[field].message; //this field is required
-				break;
-			case 'skills':
-				body['skillsError'] = err.errors[field].message; //this field is required
-				break;
-			case 'protofolio':
-				body['protofolioError'] = err.errors[field].message; //this field is required
-				break;
-			default:
-				break;
-		}
-	}
-}
 
 
 module.exports = router; //exporting this router object
