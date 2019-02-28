@@ -1,10 +1,9 @@
 const uuid = require('uuid');
 
 class Task {
-    constructor(taskName, dateCreated, taskDescription)
+    constructor(taskName, taskDescription)
     {
         this.taskName = taskName;
-        this.dateCreated = dateCreated;
         this.taskDescription = taskDescription;
         this.id = uuid.v4()
     }
