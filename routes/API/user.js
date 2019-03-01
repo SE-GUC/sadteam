@@ -3,7 +3,6 @@ router.post('/', (req, res) => {
 });
 //**4'** the create/insert function for user !
 function insertUser(req,res){
-	var user = new User(req.body);
 	var error = user.Validating(req.body);
 	if(error.error!=null){
 		res.json(error);
