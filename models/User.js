@@ -55,7 +55,7 @@ userSchema.methods.Validating = function(obj){
 
 //as a first parameter we will spicify the name of schema then we have the schema object
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema,{abortEarly: false });
 
 
 
