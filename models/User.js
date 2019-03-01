@@ -1,41 +1,5 @@
 //Schema for the user(member) entity/model
-const mongoose = require('mongoose');
 const joi = require('joi');
-var userSchema = new mongoose.Schema({
-	firstName:  {
-		type: String
-	}
-	,
-	middleName: {
-		type: String
-	},
-	lastName: {
-		type: String
-	},
-	age: {  // we may make it String.. both are okay!
-		type: Number,
-		min: 8
-	},
-	birthDate: {
-		type: Date
-	},
-	email: {
-		type: String,
-	},
-	password: {
-		type: String
-	},
-	educationalBackground: {
-		type: String
-	},
-	skills: {
-		type: String
-	},
-	portofolio: {
-		type: String
-	}
-
-});
 userSchema.methods.Validating = function(obj){
 	var schema = {
 		firstName: joi.string().required().min(3).max(20),
