@@ -33,4 +33,13 @@ app.put('/api/tasks/:id', (req, res) => {
     res.send(tasks)
 });
 
+app.delete('/api/tasks/:id', (req, res) => {
+    const taskID = req.params.id 
+    const task = tasks.find(task => task.id === taskID)
+    const index = tasks.indexOf(task)
+    tasks.splice(index,1)
+    res.send(tasks)
+})
+
+
 module.exports = [router,app];
