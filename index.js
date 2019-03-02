@@ -4,7 +4,7 @@ require('./models/db');
 
 //starting the express server by adding the require statement for express using this constant express
 const express = require('express');
-const user = require('./routes/API/user');
+const userController = require('./routes/api/user');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser'); //**2**
@@ -21,9 +21,9 @@ app.use(bodyparser.json());
 
 
 
-app.set('views', path.join(__dirname, '/views/'));
+/*app.set('views', path.join(__dirname, '/views/'));
 app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/'}));
-app.set('view engine', 'hbs');
+app.set('view engine', 'hbs');*/
 
 //start the server using the listen fucntion (3000 is the portnumber)
 app.listen(3000, () => {
@@ -31,4 +31,4 @@ app.listen(3000, () => {
 });
 
 //add a route for the userController by configuring/the_use_function
-app.use('/user', user); // from this userController we have exported the router
+app.use('/user', userController); // from this userController we have exported the router
