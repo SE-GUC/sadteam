@@ -3,7 +3,6 @@ const express = require('express')
 require('./models/db');
 const userController = require('./routes/api/user');
 app.use('/user', userController);
-const express = require('express')
 const bodyparser = require('body-parser');
 const tasks = require('./routes/api/tasks')
 app.use(bodyparser.json());
