@@ -50,14 +50,6 @@ router.delete('/delete/:id', (req, res) => {
   res.send(masterClasses.splice(index,1))
 })
 
-router.put('/book/:id', (req, res) => {
-  const bookId = req.params.id 
-  const updatedTitle = req.body.title
-  const book = books.find(book => book.id === bookId)
-  book.title = updatedTitle
-  res.send(books)
-})
-
 
 
 module.exports = router
