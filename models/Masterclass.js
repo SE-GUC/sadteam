@@ -1,4 +1,4 @@
-class masterclass{
+class Masterclass{
   constructor(name,projects,workshops,courses,id){
     this.name = name
     this.projects = projects
@@ -9,4 +9,4 @@ class masterclass{
   }
 }
 
-module.exports = masterclass
+module.exports = Masterclass
