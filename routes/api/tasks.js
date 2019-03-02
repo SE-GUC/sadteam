@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express()
-app.use(express.json());
+app.use(express.json())
 const router = express.Router();
+
 
 const Task = require('../../models/Task');
 
@@ -19,11 +20,17 @@ router.get('/', (req, res) => res.json({ data: tasks }));
 app.put('/api/tasks/:id', (req, res) => {
     const taskID = req.params.id 
     const updatedName = req.body.name
-    const updatedDescription = req.body.description
     const task = tasks.find(task => task.id === taskID)
     task.name = updatedName;
+    res.send(tasks)
+});
+
+app.put('/api/tasks/:id', (req, res) => {
+    const taskID = req.params.id 
+    const updatedDescription = req.body.description
+    const task = tasks.find(task => task.id === taskID)
     task.description = updatedDescription;
     res.send(tasks)
 });
 
-module.exports = router;
+module.exports = [router,app];
