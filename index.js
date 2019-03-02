@@ -4,7 +4,7 @@ require('./models/db');
 
 //starting the express server by adding the require statement for express using this constant express
 const express = require('express');
-const userController = require('./api/userController');
+const userController = require('./api/user');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser'); //**2**
