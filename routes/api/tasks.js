@@ -14,7 +14,7 @@ const tasks = [
 
 router.get('/', (req, res) => res.json({ data: tasks }));
 
-app.put('/api/tasks/:id', (req, res) => {
+router.put('/api/tasks/:id', (req, res) => {
     const taskID = req.params.id 
     const updatedName = req.body.name
     const updatedDescription = req.body.description
