@@ -1,13 +1,22 @@
-   
+
 const express = require('express')
-const masterclass = require('./routes/api/masterclasses')
+
+const tasks = require('./routes/api/tasks')
+const masterclasses = require('./routes/api/masterclasses')
 const app = express()
 app.use(express.json())
 
-app.use('/api/masterclasses', masterclass)
+app.get('/', (req, res) => {
+    res.send(`<h1>Lirten Hub</h1>
+    <a href="/api/tasks">Tasks</a>
+    `);
+})
+
+app.use('/api/tasks', tasks)
+app.use('/api/masterclasses', masterclasses)
 
 app.use((req, res) => {
-    res.status(404).send({err: 'We can not find what you are looking for'});
+   res.status(404).send({err: 'We can not find what you are looking for'});
  })
 
 const port = 3000
