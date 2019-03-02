@@ -10,11 +10,11 @@ const User = mongoose.model('User'); // **4** creating user object so i can inse
 //	res.json('Welcome to user page =)') //returing a response
 //});
 
-router.get('/', (req, res) => {
+/*router.get('/', (req, res) => {
 	res.render("user/addUser", {
 		viewTitle: "Insert User"
 	}); //returing a response
-});
+});*/
 
 //**1**
 // we have to create a POST route for this "/user" url.. already exists in server.js
