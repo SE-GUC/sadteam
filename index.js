@@ -2,12 +2,12 @@ const express = require('express')
 
 require('./models/db');
 const userController = require('./routes/api/user');
-app.use('/user', userController);
 const bodyparser = require('body-parser');
 const tasks = require('./routes/api/tasks')
-app.use(bodyparser.json());
 const app = express()
 app.use(express.json())
+app.use('/user', userController);
+app.use(bodyparser.json());
 
 app.get('/', (req, res) => {
     res.send(`<h1>Lirten Hub</h1>
