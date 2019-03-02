@@ -40,6 +40,7 @@ function insertUser(req,res){
 	user.educationalBackground = req.body.educationalBackground;
 	user.skills = req.body.skills;
 	user.portofolio = req.body.portofolio;
+
 	var error = user.Validating(req.body);
 	if(error.error!=null){
 		res.json(error);
@@ -147,4 +148,6 @@ router.route('/:email/remove').post(function(req, res) {
 }
 );
 
-module.exports = router;
+
+
+module.exports = router; //exporting this router object

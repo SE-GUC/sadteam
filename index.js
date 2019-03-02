@@ -1,34 +1,26 @@
-// route file (we add the require statement for db)
 
 require('./models/db');
-
-//starting the express server by adding the require statement for express using this constant express
-const express = require('express');
 const userController = require('./routes/api/user');
-const path = require('path');
-const exphbs = require('express-handlebars');
-const bodyparser = require('body-parser'); //**2**
-
-var app = express(); // calling the express function
-
-//**3**
-// here i include the form data to be in the request body
-app.use(bodyparser.urlencoded({
-	extended: true
-}));
-//i then convert this data to be in json format
+app.use('/user', userController);
+const express = require('express')
+const bodyparser = require('body-parser');
+const tasks = require('./routes/api/tasks')
 app.use(bodyparser.json());
+const app = express()
+app.use(express.json())
 
+app.get('/', (req, res) => {
+    res.send(`<h1>Lirten Hub</h1>
+    <a href="/api/tasks">Tasks</a>
+    `);
+})
 
+app.use('/api/tasks', tasks)
 
-/*app.set('views', path.join(__dirname, '/views/'));
-app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/'}));
-app.set('view engine', 'hbs');*/
+app.use((req, res) => {
+    res.status(404).send({err: 'We can not find what you are looking for'});
+ })
 
-//start the server using the listen fucntion (3000 is the portnumber)
-app.listen(3000, () => {
-	console.log('Express server started at port 3000'); //success message
-});
+const port = 3000
+app.listen(port, () => console.log(`Server up and running on port ${port}`))
 
-//add a route for the userController by configuring/the_use_function
-app.use('/user', userController); // from this userController we have exported the router
