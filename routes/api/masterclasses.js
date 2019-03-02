@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const masterClass = require('../../models/masterclass')
+const masterClass = require('../../models/Masterclass')
 const masterClasses = [
-  new masterClass('mostafa','jjfbsh','djfhsj','sdnjfhd','1'),
-  new masterClass('mostafa','jjfbsh','djfhsj','sdnjfhd','2'),
-  new masterClass('mostafa','jjfbsh','djfhsj','sdnjfhd','3'),
+  new Masterclass('mostafa','jjfbsh','djfhsj','sdnjfhd','1'),
+  new Masterclass('mostafa','jjfbsh','djfhsj','sdnjfhd','2'),
+  new Masterclass('mostafa','jjfbsh','djfhsj','sdnjfhd','3'),
 ]
 
 
