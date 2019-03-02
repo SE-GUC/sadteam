@@ -1,8 +1,12 @@
-    
 const express = require('express')
 
+require('./models/db');
+const userController = require('./routes/api/user');
+app.use('/user', userController);
+const express = require('express')
+const bodyparser = require('body-parser');
 const tasks = require('./routes/api/tasks')
-
+app.use(bodyparser.json());
 const app = express()
 app.use(express.json())
 
@@ -20,3 +24,4 @@ app.use((req, res) => {
 
 const port = 3000
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
+
