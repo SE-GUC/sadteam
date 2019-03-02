@@ -1,4 +1,41 @@
 //Schema for the user(member) entity/model
+const mongoose = require('mongoose');
+
+//validation 1
+// the userSchema object and its structure
+var userSchema = new mongoose.Schema({
+	firstName: {
+		type: String,
+	},
+	middleName: {
+		type: String,
+	},
+	lastName: {
+		type: String,
+	},
+	age: {  // we may make it String.. both are okay!
+		type: Number,
+		min: 8,
+	},
+	birthDate: {
+		type: Date,
+	},
+	email: {
+		type: String,
+	},
+	password: {
+		type: String,
+	},
+	educationalBackground: {
+		type: String,
+	},
+	skills: {
+		type: String,
+	},
+	portofolio: {
+		type: String,
+	}
+});
 const joi = require('joi');
 userSchema.methods.Validating = function(obj){
 	var schema = {
@@ -14,12 +51,12 @@ userSchema.methods.Validating = function(obj){
 		portofolio: joi.string().required()
 
 	}
-	return joi.validate(obj,schema);
+	return joi.validate(obj,schema,{abortEarly: false });
 }
 
 //as a first parameter we will spicify the name of schema then we have the schema object
 
-module.exports = mongoose.model('User', userSchema,{abortEarly: false });
+module.exports = mongoose.model('User', userSchema);
 
 
 
