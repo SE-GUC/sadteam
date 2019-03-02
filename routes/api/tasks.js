@@ -1,4 +1,6 @@
 const express = require('express');
+const app = express()
+app.use(express.json());
 const router = express.Router();
 
 const Task = require('../../models/Task');
@@ -14,7 +16,7 @@ const tasks = [
 
 router.get('/', (req, res) => res.json({ data: tasks }));
 
-router.put('/api/tasks/:id', (req, res) => {
+app.put('/api/tasks/:id', (req, res) => {
     const taskID = req.params.id 
     const updatedName = req.body.name
     const updatedDescription = req.body.description
