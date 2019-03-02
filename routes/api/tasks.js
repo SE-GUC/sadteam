@@ -11,5 +11,17 @@ const tasks = [
 	new Task('Task5', 'description5')
 ];
 
+
 router.get('/', (req, res) => res.json({ data: tasks }));
+
+app.put('/api/tasks/:id', (req, res) => {
+    const taskID = req.params.id 
+    const updatedName = req.body.name
+    const updatedDescription = req.body.description
+    const task = tasks.find(task => task.id === taskID)
+    task.name = updatedName;
+    task.description = updatedDescription;
+    res.send(tasks)
+});
+
 module.exports = router;
