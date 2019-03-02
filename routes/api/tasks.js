@@ -12,3 +12,4 @@ const tasks = [
 ];
 
 router.get('/', (req, res) => res.json({ data: tasks }));
+module.exports = router;
