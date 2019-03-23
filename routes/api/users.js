@@ -79,7 +79,7 @@ router.put('/:email/update', async (req,res) => {
      const user = await User.findOne({email})
      if(!user) return res.status(404).send({error: 'User does not exist'})
      const isValidated = validator.updateValidation(req.body)
-     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.message })
      const updatedUser = await User.updateOne(req.body)
      res.json({msg: 'User updated successfully'})
     }
