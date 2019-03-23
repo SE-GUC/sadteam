@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const uuid = require('uuid');
+const User = require('./User').schema
 
 
 const TaskSchema = new Schema({
@@ -9,21 +9,30 @@ const TaskSchema = new Schema({
         required: true
     },
     description: {
-        type: object,
-        required: true
-    },
-    currentState: {
         type: String,
         required: true
     },
-    id: {
-        type: Number,
-        required: true
+
+    applicants: {
+        type: [User]
+    },
+    skillsRequired: {
+        type: [String]
+    },
+    reviewed: {
+        type: Boolean
+    },
+    assignee: {
+        type: User
+    },
+      currentState: {
+        type: String
     },
     assignedConsultancy: {
-      type: String,
-      required: false
+      type: String
+
     }
 })
 
 module.exports = Task = mongoose.model('tasks', TaskSchema)
+
