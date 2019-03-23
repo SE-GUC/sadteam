@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
     };
     return res.json({ data: newTask });
 });
-// Update Current State
+// Update current state
 
 router.put('/updateCurrentState/:id', (req, res) => {
     try{ 
