@@ -4,7 +4,7 @@ const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const User = mongoose.model('User'); // **4** creating user object so i can insert in the db
-const anothertask = mongoose.model('anothertask');//
+const anothertask = mongoose.model('Task');//
 //creating new router ('/' is the default url + the request handler function)
 //router.get('/', (req, res) => {
 //	res.json('Welcome to user page =)') //returing a response
@@ -161,8 +161,8 @@ router.route('/records/:email/recommendations').get(function(req,res){
 	anothertask.find(function(err,task){
 					for(i =  0 ; i<task.length;i++){
 						var check = true;
-						for(j=0;j<task[i].skills.length;j++){
-							if((array2[0].skills.includes(task[i].skills[j]))==false){
+						for(j=0;j<task[i].skillsRequired.length;j++){
+							if((array2[0].skills.includes(task[i].skillsRequired[j]))==false){
 								check = false;
 							}
 							if(check==false){
