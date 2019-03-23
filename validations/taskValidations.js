@@ -5,8 +5,8 @@ module.exports = {
         const createSchema = {
             name: Joi.string().min(3).max(500).required(),
             description: Joi.string().min(3).max(100).required(),
-            applicants: Joi.number().min(50).max(3000),
-            skillsRequired: Joi.string(),
+            applicants: Joi.array(),
+            skillsRequired: Joi.array(),
             reviewed: Joi.boolean().default(False)
         }
 
@@ -17,8 +17,8 @@ module.exports = {
         const updateSchema = {
             name: Joi.string().min(3).max(500),
             description: Joi.string().min(3).max(100),
-            applicants: Joi.number().min(50).max(3000),
-            skillsRequired: Joi.string(),
+            applicants: Joi.array(),
+            skillsRequired: Joi.array(),
             reviewed: Joi.boolean()
         }
 
