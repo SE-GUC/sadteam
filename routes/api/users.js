@@ -49,8 +49,12 @@ router.post('/',  (req,res) => {
 				}
 			}
 		}
-const User = require('../../models/User');
-const validator = require('../../validations/taskValidations')
+	}
+	catch(error) {
+        // We will be handling the error later
+        console.log(error)
+	}})
+
 
 router.get('/', async (req,res) => {
     const users = await User.find()
@@ -80,13 +84,18 @@ router.route('/records/:email').get(function(req,res){
 	
 });
 router.put('/:email/update', async (req,res) => {
-    try {
+    try {	
      const email = req.params.email
      const user = await User.findOne({email})
      if(!user) return res.status(404).send({error: 'User does not exist'})
      const isValidated = validator.updateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.message })
- 
+	}
+	catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+ })
  router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id
@@ -148,7 +157,8 @@ router.route('/records/:email/recommendations').get(function(req,res){
 				})
 });
 
- })
+ 
+
 
 router.delete('/:id', async (req,res) => {
     try {
@@ -161,6 +171,7 @@ router.delete('/:id', async (req,res) => {
         console.log(error)
     }  
  })
+ 
 
 
 module.exports = router; //exporting this router object
