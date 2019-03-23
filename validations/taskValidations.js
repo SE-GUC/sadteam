@@ -6,7 +6,8 @@ module.exports = {
             name: Joi.string().min(3).max(500).required(),
             description: Joi.string().min(3).max(100).required(),
             applicants: Joi.number().min(50).max(3000),
-            skillsRequired: Joi.string()
+            skillsRequired: Joi.string(),
+            reviewed: Joi.boolean().default(False)
         }
 
         return Joi.validate(request, createSchema)
@@ -17,7 +18,8 @@ module.exports = {
             name: Joi.string().min(3).max(500),
             description: Joi.string().min(3).max(100),
             applicants: Joi.number().min(50).max(3000),
-            skillsRequired: Joi.string()
+            skillsRequired: Joi.string(),
+            reviewed: Joi.boolean()
         }
 
         return Joi.validate(request, updateSchema)
