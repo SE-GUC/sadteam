@@ -1,10 +1,13 @@
-    
 const express = require('express')
 
+require('./models/db');
+const userController = require('./routes/api/user');
+const bodyparser = require('body-parser');
 const tasks = require('./routes/api/tasks')
-
 const app = express()
 app.use(express.json())
+app.use('/user', userController);
+app.use(bodyparser.json());
 
 app.get('/', (req, res) => {
     res.send(`<h1>Lirten Hub</h1>
@@ -20,3 +23,4 @@ app.use((req, res) => {
 
 const port = 3000
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
+
