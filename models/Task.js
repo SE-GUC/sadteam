@@ -19,6 +19,10 @@ const TaskSchema = new Schema({
     id: {
         type: Number,
         required: true
+    },
+    assignedConsultancy: {
+      type: String,
+      required: false
     }
 })
 
