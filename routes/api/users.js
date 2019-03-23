@@ -3,18 +3,19 @@
 const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-const User = mongoose.model('User'); // **4** creating user object so i can insert in the db
 
 //creating new router ('/' is the default url + the request handler function)
 //router.get('/', (req, res) => {
 //	res.json('Welcome to user page =)') //returing a response
 //});
 
-router.get('/', (req, res) => {
-	res.render("user/addUser", {
-		viewTitle: "Insert User"
-	}); //returing a response
-});
+const User = require('../../models/User');
+const validator = require('../../validations/taskValidations')
+
+router.get('/', async (req,res) => {
+    const users = await User.find()
+    res.json({data: users})
+})
 
 //**1**
 // we have to create a POST route for this "/user" url.. already exists in server.js
@@ -22,11 +23,6 @@ router.get('/', (req, res) => {
 //router.post('/', (req, res) => { 
 //	cosole.log(req.body);
 //});
-router.post('/', (req, res) => { 
-	insertUser(req,res);
-});
-
-//**4'** the create/insert function for user !
 
 function insertUser(req,res){
 	var user = new User();
