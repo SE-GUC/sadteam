@@ -1,12 +1,25 @@
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const uuid = require('uuid');
 
-class Task {
-    constructor(name, description)
-    {
-        this.name = name;
-        this.description = description;
-        this.id = uuid.v4()
-    }
-}
 
-module.exports = Task;
+const TaskSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: object,
+        required: true
+    },
+    currentState: {
+        type: String,
+        required: true
+    },
+    id: {
+        type: Number,
+        required: true
+    }
+})
+
+module.exports = Task = mongoose.model('tasks', TaskSchema)
