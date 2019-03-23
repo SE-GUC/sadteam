@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-
-const User = require('./User')
+const User = require('./User').schema
 
 const TaskSchema = new Schema({
     name: {
@@ -20,6 +19,7 @@ const TaskSchema = new Schema({
     },
     reviewed: {
         type: [Boolean]
+    }
 })
 
 module.exports = Task = mongoose.model('tasks', TaskSchema)
