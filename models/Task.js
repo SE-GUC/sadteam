@@ -22,7 +22,7 @@ const TaskSchema = new Schema({
     },
     assignedConsultancy: {
       type: String,
-      required: false
+      required:  false
     }
 })
 
