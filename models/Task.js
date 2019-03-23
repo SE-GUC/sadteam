@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-
 const User = require('./User').Schema
 
 
@@ -25,7 +24,14 @@ const TaskSchema = new Schema({
     },
     assignee: {
         type: User
+    },
+      currentState: {
+        type: String
+    },
+    assignedConsultancy: {
+      type: String
     }
 })
 
 module.exports = Task = mongoose.model('tasks', TaskSchema)
+
