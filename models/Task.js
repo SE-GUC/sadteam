@@ -13,6 +13,7 @@ const TaskSchema = new Schema({
         type: String,
         required: true
     },
+
     applicants: {
         type: [User]
     },
@@ -30,6 +31,7 @@ const TaskSchema = new Schema({
     },
     assignedConsultancy: {
       type: String
+
     }
 })
 
