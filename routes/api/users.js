@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 //});
 
 const User = require('../../models/User');
-const validator = require('../../validations/taskValidations')
+const validator = require('../../validations/userValidations')
 
 router.get('/', async (req,res) => {
     const users = await User.find()
@@ -66,7 +66,7 @@ router.post('/', (req, res) => {
 //creating new route to show inserted user records
 router.get('/records', (req,res) => {
 	User.find().
-	select('id firstName middleName lastName age birtDate email password educationalBackground Skills  portofolio')
+	select('id firstName middleName lastName age birtDate email password educationalBackground skills  portofolio')
 	.then(users => res.json(users));
 });
 
@@ -76,7 +76,7 @@ router.route('/records/:email').get(function(req,res){
 			res.status(404).send('data not found');
 		}
 		res.json(user[0]);
-	}).	select('id firstName middleName lastName age birtDate email password educationalBackground Skills  portofolio')
+	}).	select('id firstName middleName lastName age birtDate email password educationalBackground skills  portofolio')
 	;
 	
 });
