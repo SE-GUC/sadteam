@@ -3,74 +3,63 @@
 const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-const User = mongoose.model('User'); // **4** creating user object so i can insert in the db
+const Task = require('../../models/Task');
 
 //creating new router ('/' is the default url + the request handler function)
 //router.get('/', (req, res) => {
 //	res.json('Welcome to user page =)') //returing a response
 //});
 
-router.get('/', (req, res) => {
-	res.render("user/addUser", {
-		viewTitle: "Insert User"
-	}); //returing a response
-});
-
+const User = require('../../models/User');
+const validator = require('../../validations/userValidations')
 //**1**
 // we have to create a POST route for this "/user" url.. already exists in server.js
 //i wanted to have the parameters inserted in the request body here (i will use body-parser)
 //router.post('/', (req, res) => { 
 //	cosole.log(req.body);
 //});
-router.post('/', (req, res) => { 
-	insertUser(req,res);
-});
 
-//**4'** the create/insert function for user !
-
-function insertUser(req,res){
-	var user = new User();
-	user.firstName = req.body.firstName;
-	user.middleName = req.body.middleName;
-	user.lastName = req.body.lastName;
-	user.age = req.body.age;
-	user.birthDate = req.body.birthDate;
-	user.email = req.body.email;
-	user.password = req.body.password;
-	user.educationalBackground = req.body.educationalBackground;
-	user.skills = req.body.skills;
-	user.portofolio = req.body.portofolio;
-
-	var error = user.Validating(req.body);
-	if(error.error!=null){
-		res.json(error);
-	}else{
-		User.find({email:req.body.email}, function(err,user1){
-			if(user1.length!=0){
-				res.json("Email Address Already Exists")
-			}else{
-				user.save((err, doc) => {
-					if(!err)
-						res.redirect('../user/records'); // if no err while inserting, redirect to new route
-					else{ 
-						console.log('Error while inserting user: ' + err);
-					}
-				});
+router.post('/',  (req,res) => {
+    try {
+     const isValidated = validator.createValidation(req.body)
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.message })
+	 const newUser = new User();
+	 newUser.firstName = req.body.firstName;
+	 newUser.middleName = req.body.middleName;
+	 newUser.lastName = req.body.lastName;
+	 newUser.age = req.body.age;
+	 newUser.birthDate = req.body.birthDate;
+	 newUser.email = req.body.email;
+	 newUser.password = req.body.password;
+	 newUser.educationalBackground = req.body.educationalBackground;
+	 newUser.skills = req.body.skills;
+	 newUser.portofolio = req.body.portofolio;
+	 
+		 const users = Users.find();	
+		if(users.length==0){
+			User.create(newUser);
+			
+		}else{
+			for(i = 0 ; i< users.length;i++){
+				if(newUser.email == users[i].email){
+					res.json('email exists');
+				}else{
+					res.json({msg:'user added successfully',data:newUser})
+				}
 			}
-		});
-	
-}
-}
-router.post('/', (req, res) => { 
-	insertUser(req,res);
-});
-//**4'** the create/insert function for user !
+		}
+    }
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+ })
 
 
 //creating new route to show inserted user records
 router.get('/records', (req,res) => {
 	User.find().
-	select('id firstName middleName lastName age birtDate email password educationalBackground Skills  portofolio')
+	select('id firstName middleName lastName age birtDate email password educationalBackground skills  portofolio')
 	.then(users => res.json(users));
 });
 
@@ -80,63 +69,25 @@ router.route('/records/:email').get(function(req,res){
 			res.status(404).send('data not found');
 		}
 		res.json(user[0]);
-	}).	select('id firstName middleName lastName age birtDate email password educationalBackground Skills  portofolio')
+	}).	select('id firstName middleName lastName age birtDate email password educationalBackground skills  portofolio')
 	;
 	
 });
-router.route('/update/:email').post(function(req, res) {
-    User.find({email: req.params.email},function(err,user){
-		if(user.length==0){
-			res.status(404).send('User not found');
-		}else{
-			if(!req.body.firstName){
-            }else{
-                user[0].firstName = req.body.firstName;
-            }
-            if(!req.body.middleName){
-            }else{
-                user[0].middleName = req.body.middleName;
-            }
-            if(!req.body.lastName){
-            }else{
-                user[0].lastName = req.body.lastName;
-            }
-            if(!req.body.age){
-            }else{
-                user[0].age = req.body.age;
-            }
-            if(!req.body.birthDate){
-            }else{
-                user[0].birthDate = req.body.birthDate;
-            }
-            if(!req.body.Skills){
-            }else{
-                user[0].Skills = req.body.Skills;
-            }
-            if(!req.body.password){
-            }else{
-                user[0].password = req.body.password;
-            }
-            if(!req.body.educationalBackground){
-            }else{
-                user[0].educationalBackground = req.body.educationalBackground;
-            }
-            if(!req.body.Tasks){
-            }else{
-                user[0].portofolio = req.body.portofolio;
-            }
-		}
-		user[0].save((err, doc) => {
-			if(!err){
-				res.json("User Updated");
-			}
-			else{
-				console.log('Error while updating user: ' + err);
-			}
-		});
-	}
-)
-});
+router.put('/:email/update', async (req,res) => {
+    try {
+     const email = req.params.email
+     const user = await User.findOne({email})
+     if(!user) return res.status(404).send({error: 'User does not exist'})
+     const isValidated = validator.updateValidation(req.body)
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+     const updatedUser = await User.updateOne(req.body)
+     res.json({msg: 'User updated successfully'})
+    }
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+ });
 router.route('/:email/remove').post(function(req, res) {
 	User.findOneAndDelete({email:req.params.email},function(err,user){
 		if(user == null){
@@ -147,7 +98,38 @@ router.route('/:email/remove').post(function(req, res) {
 	})
 }
 );
+var array2 = new Array();
+router.route('/records/:email/recommendations').get(function(req,res){
+	var arr = new Array();
+	User.find({email:req.params.email},function(err,user){
+		if(user.length==0){
+			res.status(404).send('User not found');
+		}else{
+			array2 = user;
+		}
+	});
 
-
+	Task.find(function(err,task){
+					for(i =  0 ; i<task.length;i++){
+						var check = true;
+						for(j=0;j<task[i].skills.length;j++){
+							if((array2[0].skills.includes(task[i].skills[j]))==false){
+								check = false;
+							}
+							if(check==false){
+								break;
+							}
+						}
+						if(check == true){
+							arr.push(task[i])
+						}
+					}
+					if(arr.length==0){
+						res.json("No recommended Tasks are availiable.");
+					}else{
+						res.json(arr);
+					}
+				})
+});
 
 module.exports = router; //exporting this router object
