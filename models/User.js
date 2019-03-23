@@ -30,7 +30,7 @@ var userSchema = new mongoose.Schema({
 		type: String,
 	},
 	skills: {
-		type: [string],
+		type: [String],
 	},
 	portofolio: {
 		type: String,
