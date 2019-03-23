@@ -49,6 +49,7 @@ router.put('/:id', async (req,res) => {
     }  
  })
 //user applying for a task
+
  router.put('/:id/:userid', async (req,res) => {
      try{
          //I will use either the ID or the information from the body, not both
@@ -62,7 +63,6 @@ router.put('/:id', async (req,res) => {
      console.log(error)
      }
  })
-
 router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id

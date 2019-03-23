@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const User = require('./User')
+
+const User = require('./User').Schema
+
 
 const TaskSchema = new Schema({
     name: {
@@ -13,10 +15,16 @@ const TaskSchema = new Schema({
         required: true
     },
     applicants: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+        type: [User]
     },
     skillsRequired: {
         type: [String]
+    },
+    reviewed: {
+        type: Boolean
+    },
+    assignee: {
+        type: User
     }
 })
 

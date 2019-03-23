@@ -1,8 +1,9 @@
-// this file is dealing with the CRUD operations related to the user
+
 
 const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
+
 const Task = require('../../models/Task');
 
 //creating new router ('/' is the default url + the request handler function)
@@ -48,12 +49,17 @@ router.post('/',  (req,res) => {
 				}
 			}
 		}
-    }
-    catch(error) {
-        // We will be handling the error later
-        console.log(error)
-    }  
- })
+const User = require('../../models/User');
+const validator = require('../../validations/taskValidations')
+
+router.get('/', async (req,res) => {
+    const users = await User.find()
+    res.json({data: users})
+})
+
+ 
+ 
+
 
 
 //creating new route to show inserted user records
@@ -80,6 +86,15 @@ router.put('/:email/update', async (req,res) => {
      if(!user) return res.status(404).send({error: 'User does not exist'})
      const isValidated = validator.updateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.message })
+ 
+ router.put('/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const user = await User.findOne({id})
+     if(!user) return res.status(404).send({error: 'User does not exist'})
+     const isValidated = validator.updateValidation(req.body)
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+ 
      const updatedUser = await User.updateOne(req.body)
      res.json({msg: 'User updated successfully'})
     }
@@ -87,6 +102,7 @@ router.put('/:email/update', async (req,res) => {
         // We will be handling the error later
         console.log(error)
     }  
+
  });
 router.route('/:email/remove').post(function(req, res) {
 	User.findOneAndDelete({email:req.params.email},function(err,user){
@@ -131,5 +147,20 @@ router.route('/records/:email/recommendations').get(function(req,res){
 					}
 				})
 });
+
+ })
+
+router.delete('/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const deletedUser = await User.findByIdAndRemove(id)
+     res.json({msg:'User was deleted successfully', data: deletedUser})
+    }
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+ })
+
 
 module.exports = router; //exporting this router object
