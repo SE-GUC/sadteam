@@ -2,10 +2,9 @@ const express = require('express');
 const Joi = require('joi');
 const uuid = require('uuid');
 const router = express.Router();
-
 const Masterclass = require('../../models/Masterclass');
-
-
+const mongoose = require('mongoose')
+const validator = require('../../validations/masterclassValidations')
 
 router.get('/', (req, res) => res.json({ data: masterclasses }));
 
@@ -81,11 +80,8 @@ router.post('/joi', (req, res) => {
     };
     return res.json({ data: newMasterclass });
 });
-=======
-const mongoose = require('mongoose')
 
-const Masterclass = require('../../models/Masterclass');
-const validator = require('../../validations/masterclassValidations')
+
 
 router.get('/', async (req,res) => {
     const masterclasses = await Masterclass.find()
