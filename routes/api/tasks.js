@@ -88,6 +88,20 @@ router.put('/:id', async (req,res) => {
     }  
  })
 //user applying for a task
+
+ router.put('/:id/:userid', async (req,res) => {
+     try{
+         //I will use either the ID or the information from the body, not both
+         const userid = req.params.userid
+         const user = await user.findOne(req.body)
+         if(!task) return res.status(404).send({error: 'Task does not exist'})
+         Task.findOneAndUpdate({id: req.params.id}, {$push: {applicants: user}});
+
+     }
+     catch(error){
+     console.log(error)
+     }
+ })
 router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id
