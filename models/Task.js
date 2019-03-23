@@ -17,7 +17,9 @@ const TaskSchema = new Schema({
     },
     skillsRequired: {
         type: [String]
-    }
+    },
+    reviewed: {
+        type: [Boolean]
 })
 
 module.exports = Task = mongoose.model('tasks', TaskSchema)
