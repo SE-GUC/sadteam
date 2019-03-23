@@ -1,7 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-require('./models/db');
-const users = require('./routes/api/user');
+const users = require('./routes/api/users');
 const bodyparser = require('body-parser');
 const tasks = require('./routes/api/tasks')
 const masterclasses = require('./routes/api/masterclasses')

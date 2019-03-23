@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const User = require('./User').schema
+const User = require('./User').Schema
 
 const TaskSchema = new Schema({
     name: {
@@ -17,6 +17,9 @@ const TaskSchema = new Schema({
     },
     skillsRequired: {
         type: [String]
+    },
+    reviewed: {
+        type: Boolean
     },
     assignee: {
         type: User

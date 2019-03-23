@@ -3,7 +3,6 @@
 const express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-
 const User = require('../../models/User');
 const validator = require('../../validations/taskValidations')
 
