@@ -32,6 +32,6 @@ module.exports = {
             portofolio: joi.string()
         }
 
-        return joi.validate(request, updateSchema)
+        return joi.validate(request, updateSchema,{abortEarly: false })
     }, 
 }
