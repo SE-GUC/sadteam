@@ -17,6 +17,9 @@ const TaskSchema = new Schema({
     },
     skillsRequired: {
         type: [String]
+    },
+    assignee: {
+        type: User
     }
 })
 
