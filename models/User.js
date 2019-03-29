@@ -37,6 +37,9 @@ var userSchema = new mongoose.Schema({
 	},
 	partner: {
 		type: Boolean	
+	},
+	admin: {
+		type: Boolean
 	}
 });
 
