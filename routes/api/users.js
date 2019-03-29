@@ -171,7 +171,44 @@ router.delete('/:id', async (req,res) => {
         console.log(error)
     }  
  })
- 
+
+
+////////////***Bisho Update Partner UserStory***/////////////
+
+
+// "Updating" Partner info 
+//-- Waiting for the subclass partner to be finished then we can try this function --
+
+/*
+router.get('/:id', (req,res) => {
+	Partner.findById(req.params.id, (err, doc) =>{
+
+	});
+
+});
+*/
+router.post('/', (req, res) => {
+	if (req.body._id == '')
+		insertPartner(req, res);
+		else
+			updatePartner(req, res);
+});
+
+//findOneAndUpdate method has as a first parameter the filtering condition (id) 
+// and as a second parameter the object with the updated partner details 
+
+function updatePartner(req, res) {
+	Partner.findOneAndUpdate({_id: req.body._id}, req.body, { new: true }, (err, doc) => {
+		if (!err) { res.redirect('/:profile/update'); }
+
+		else {
+
+			//will handle error later
+			console.log('Error during update: ' + err); 
+
+		}
+	});
+} 
 
 
 module.exports = router; //exporting this router object
