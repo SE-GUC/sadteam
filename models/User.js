@@ -34,6 +34,9 @@ var userSchema = new mongoose.Schema({
 	},
 	portofolio: {
 		type: String,
+	},
+	partner: {
+		type: Boolean	
 	}
 });
 
