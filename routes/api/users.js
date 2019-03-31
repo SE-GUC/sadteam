@@ -187,27 +187,34 @@ router.get('/:id', (req,res) => {
 
 });
 */
+
+/*
 router.post('/', (req, res) => {
 	if (req.body._id == '')
 		insertPartner(req, res);
 		else
 			updatePartner(req, res);
-});
+});*/
+
 
 //findOneAndUpdate method has as a first parameter the filtering condition (id) 
 // and as a second parameter the object with the updated partner details 
 
 function updatePartner(req, res) {
-	Partner.findOneAndUpdate({_id: req.body._id}, req.body, { new: true }, (err, doc) => {
-		if (!err) { res.redirect('/:profile/update'); }
+	if(req.body.partner == true){
+		Partner.findOneAndUpdate({_id: req.body._id}, req.body, { new: true }, (err, doc) => {
+		if (!err) { res.redirect('/update/:id'); }
 
 		else {
-
 			//will handle error later
 			console.log('Error during update: ' + err); 
 
 		}
 	});
+	}
+	else{
+		console.log('sorry you are not a partner');
+	}	
 } 
 
 
