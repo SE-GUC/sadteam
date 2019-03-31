@@ -43,6 +43,7 @@ var userSchema = new mongoose.Schema({
 	admin: {
 		type: Boolean
 	},
+
 	consultancyAgency: {
 		type: Boolean
 	},
