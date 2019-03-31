@@ -90,3 +90,28 @@ test('Create a task', async () => {
   const task = await axios.post("http://localhost:3000/api/tasks",body)
   expect(task.status).toEqual(200)
 });
+
+test('Delete a user', async () => {
+  body ={
+      "firstName": "John",
+      "lastName": "Doe",
+      "age": 12,
+      "email": "someone@something.com",
+      "password": "12345"
+      }
+  expect.assertions(1)
+  const user = await axios.post("http://localhost:3000/api/users",body)
+  const deletedUser await axios.delete(`http://localhost:3000/api/users/${user.data.data._id}`)
+  expect(deletedUser.status).toEqual(200)
+});
+
+test('Delete a masterclass', async () => {
+  body ={
+      "name": "masterclassName",
+      "description": "masterclassDescription",
+      }
+  expect.assertions(1)
+  const masterclass = await axios.post("http://localhost:3000/api/masterclasses",body)
+  const deletedMasterclass = await axios.delete(`http://localhost:3000/api/masterclasses/${masterclass.data.data._id}`)                                     
+  expect(deletedMasterclass.status).toEqual(200)
+});
