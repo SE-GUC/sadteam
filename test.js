@@ -42,6 +42,19 @@ test('Update a masterclass', async () => {
   expect(updatedMasterclass.status).toEqual(200)
 });
 
+test('Create a user', async () => {
+  body ={
+      "firstName": "John",
+      "lastName": "Doe",
+      "age": 12,
+      "email": "someone@something.com",
+      "password": "12345"
+      }
+  expect.assertions(1)
+  const user = await axios.post("http://localhost:3000/api/users",body)
+  expect(user.status).toEqual(200)
+});
+
  test(`Getting all tasks`, async () => {
     expect.assertions(1)
     const task =  await funcs.getTask()
