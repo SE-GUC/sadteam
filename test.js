@@ -1,3 +1,4 @@
+const funcs = require('./fn');
 
 test('Update a task', async () => {
   body ={
@@ -28,3 +29,16 @@ test('Update a user', async () => {
   await axios.delete(`http://localhost:3000/api/user/${user.data.data._id}`)
   expect(updatedUser.status).toEqual(200)
 });
+
+ test(`Getting all tasks`, async () => {
+    expect.assertions(1)
+    const task =  await funcs.getTask()
+  });
+
+test(`Getting one task`, async () => {
+    expect.assertions(1)
+    const task =  await funcs.getTask()
+    //or get via id or some other attribute
+    expect(task.data.name).toEqual('Task1')
+  });
+
