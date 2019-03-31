@@ -39,6 +39,8 @@ router.post('/',  (req,res) => {
 	 newUser.admin = req.body.admin;
 	 newUser.consultancyAgency = req.body.consultancyAgency;
 	 newUser.consultancyInformation = req.body.consultancyInformation;
+	 newUser.reviews = req.body.reviews;
+
 	 
 		 const users = Users.find();	
 		if(users.length==0){
@@ -231,6 +233,24 @@ function updatePartner(req, res) {
 		console.log('sorry you are not a partner');
 	}	
 } 
+
+ router.put('/:id', async (req,res) => {
+    try {
+     const reviewText = req.body.reviewText
+     if(!user) return res.status(404).send({error: 'User does not exist'})
+     const isValidated = validator.updateValidation(req.body)
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+ 
+     User.findOneAndUpdate({id: req.params.id}, {$push: {reviews: reviewText}});
+     res.json({msg: 'User updated successfully'})
+    }
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+
+})
+
 
 
 module.exports = router; //exporting this router object

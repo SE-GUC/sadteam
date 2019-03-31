@@ -34,13 +34,14 @@ var userSchema = new mongoose.Schema({
 	},
 	portofolio: {
 		type: String,
-	}, 
+	},
 	partner: {
-		type: Boolean
+		type: Boolean	
 	},
 	admin: {
 		type: Boolean
-	}, 
+	},
+
 	consultancyAgency: {
 		type: Boolean
 	},
