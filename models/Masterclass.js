@@ -10,6 +10,10 @@ const MasterclassSchema = new Schema({
         type: String,
         required: true
     }
+    ,
+    Complete:{
+        type: [String]
+    }
 })
 
 module.exports = Masterclass = mongoose.model('masterclasses', MasterclassSchema);
