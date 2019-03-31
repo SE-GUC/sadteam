@@ -1,4 +1,4 @@
-const functions = require('./users');
+/*const functions = require('./users');
 
 
 
@@ -27,8 +27,13 @@ test('UpdatePartner functions should not be null', () => {
 });
 
 
+*/
+
 //waiting for partner subclass
 /*
 test('Partner to be instance of a user', () => {
   expect(functions.Partner()).toBeInstanceOf(functions.post());
 });*/
+
+
+
