@@ -145,3 +145,18 @@ test('Adding user as an applicant to a task', async () => {
     const task =  await funcs.getTask()
     expect(task.data.name).toEqual('Task1')
   });
+
+
+test('Delete a task', async () => {
+  body ={
+      "name": "taskName",
+      "description": "taskDescription",
+      "skillsRequired": ["Heraldry"],
+      "currentState": "Created",
+      "reviewed": true
+      }
+  expect.assertions(1)
+  const task = await axios.post("http://localhost:3000/api/tasks",body)
+  const deletedTask = await axios.delete(http://localhost:3000/api/tasks/${task.data.data._id})
+  expect(deletedTask.status).toEqual(200)
+});
