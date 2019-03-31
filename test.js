@@ -161,3 +161,17 @@ test('Updating consultancy agency info', async () => {
   await axios.delete("http://localhost:3000/api/users/${user.data.data._id}")
   expect(updatedUser.status).toEqual(200)
 });
+
+test('Delete a task', async () => {
+  body ={
+      "name": "taskName",
+      "description": "taskDescription",
+      "skillsRequired": ["Heraldry"],
+      "currentState": "Created",
+      "reviewed": true
+      }
+  expect.assertions(1)
+  const task = await axios.post("http://localhost:3000/api/tasks%22,body)
+  const deletedTask = await axios.delete(http://localhost:3000/api/tasks/${task.data.data._id})
+  expect(deletedTask.status).toEqual(200)
+});
