@@ -35,6 +35,8 @@ router.post('/',  (req,res) => {
 	 newUser.educationalBackground = req.body.educationalBackground;
 	 newUser.skills = req.body.skills;
 	 newUser.portofolio = req.body.portofolio;
+	 newUser.partner = req.body.partner;
+	 newUser.admin = req.body.admin;
 	 newUser.reviews = req.body.reviews;
 	 
 		 const users = Users.find();	
