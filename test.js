@@ -171,7 +171,7 @@ test('Delete a task', async () => {
       "reviewed": true
       }
   expect.assertions(1)
-  const task = await axios.post("http://localhost:3000/api/tasks%22,body)
+  const task = await axios.post("http://localhost:3000/api/tasks",body)
   const deletedTask = await axios.delete(http://localhost:3000/api/tasks/${task.data.data._id})
   expect(deletedTask.status).toEqual(200)
 });
