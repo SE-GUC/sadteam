@@ -48,27 +48,9 @@ test('Update a masterclass', async () => {
     expect(task.status).toEqual(200)
   });
 
-test('Create a task', async () => {
-  body ={
-      "name": "taskName",
-      "description": "taskDescription",
-      "skillsRequired": ["Heraldry"],
-      "currentState": "Created",
-      "reviewed": true
-      }
-  expect.assertions(1)
-  const task = await axios.post("http://localhost:3000/api/tasks",body)
-  expect(task.status).toEqual(200)
-});
-
-test('Create a masterclass', async () => {
-  body ={
-      "name": "masterclassName",
-      "description": "masterclassDescription",
-      }
-  expect.assertions(1)
-  const masterclass = await axios.post("http://localhost:3000/api/masterclasses",body)
-  expect(masterclass.status).toEqual(200)
-});
-
+ test(`Getting all masterclasses`, async () => {
+    expect.assertions(1)
+    const masterclass =  await funcs.getMasterclass()
+    expect(masterclass.status).toEqual(200)
+  });
 
