@@ -21,6 +21,12 @@ test('User age should be less than 120', () => {
   expect(functions.get().age).toBeLessThan(120);
 });
 
+
+test('UpdatePartner functions should not be null', () => {
+  expect(functions.updatePartner()).toBeNull(); // must fail
+});
+
+
 //waiting for partner subclass
 /*
 test('Partner to be instance of a user', () => {

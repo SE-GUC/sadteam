@@ -173,11 +173,9 @@ router.delete('/:id', async (req,res) => {
  })
 
 
-////////////***Bisho Update Partner UserStory***/////////////
+// -- Bisho Update Partner UserStory
 
-
-// "Updating" Partner info 
-//-- Waiting for the subclass partner to be finished then we can try this function --
+// -- "Updating" Partner info 
 
 /*
 router.get('/:id', (req,res) => {
