@@ -12,7 +12,10 @@ module.exports = {
             password: joi.string().regex(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/).required(),
             educationalBackground: joi.string().min(5).required(),
             skills: joi.string().min(5),
-            portofolio: joi.string()
+            portofolio: joi.string(),
+            partner: joi.boolean(),
+            admin: joi.boolean()
+            
         }
 
         return Joi.validate(request, createSchema)
@@ -29,7 +32,9 @@ module.exports = {
             password: joi.string().regex(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/),
             educationalBackground: joi.string().min(5),		
             skills: joi.string().min(5),
-            portofolio: joi.string()
+            portofolio: joi.string(),
+            partner: joi.boolean(),
+            admin: joi.boolean()
         }
 
         return Joi.validate(request, updateSchema)

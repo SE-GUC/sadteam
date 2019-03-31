@@ -30,10 +30,16 @@ var userSchema = new mongoose.Schema({
 		type: String,
 	},
 	skills: {
-		type: String,
+		type: [String],
 	},
 	portofolio: {
 		type: String,
+	},
+	partner: {
+		type: Boolean	
+	},
+	admin: {
+		type: Boolean
 	}
 });
 
