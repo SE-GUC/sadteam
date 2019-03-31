@@ -139,3 +139,9 @@ test('Adding user as an applicant to a task', async () => {
   await axios.delete(`http://localhost:3000/api/tasks/${task.data.data._id}`)
   expect(updatedTask.status).toEqual(200)
 });
+
+ test(`Getting a certain task`, async () => {
+    expect.assertions(1)
+    const task =  await funcs.getTask()
+    expect(task.data.name).toEqual('Task1')
+  });
