@@ -14,7 +14,9 @@ module.exports = {
             skills: joi.string().min(5),
             portofolio: joi.string(),
             partner: joi.boolean(),
-            admin: joi.boolean()
+            admin: joi.boolean(),
+            review: [joi.string()]
+
             
         }
 
@@ -34,7 +36,8 @@ module.exports = {
             skills: joi.string().min(5),
             portofolio: joi.string(),
             partner: joi.boolean(),
-            admin: joi.boolean()
+            admin: joi.boolean(),
+            review: [joi.string()]
         }
 
         return Joi.validate(request, updateSchema)
