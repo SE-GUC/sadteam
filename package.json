@@ -4,7 +4,7 @@
   "description": "CRUD operations",
   "main": "server.js",
   "scripts": {
-    "test": "jest" //added by bisho
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
