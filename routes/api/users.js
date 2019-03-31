@@ -37,6 +37,8 @@ router.post('/',  (req,res) => {
 	 newUser.portofolio = req.body.portofolio;
 	 newUser.partner = req.body.partner;
 	 newUser.admin = req.body.admin;
+	 newUser.consultancyAgency = req.body.consultancyAgency;
+	 newUser.consultancyInformation = req.body.consultancyInformation;
 	 
 		 const users = Users.find();	
 		if(users.length==0){
@@ -98,16 +100,27 @@ router.put('/:email/update', async (req,res) => {
         console.log(error)
     }  
  })
+
+
+
+// -- updatePartner if user is a partner --bishoy
+
  router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id
      const user = await User.findOne({id})
-     if(!user) return res.status(404).send({error: 'User does not exist'})
+     if(!user) return res.status(404).send({error: 'User does not exist'})	
      const isValidated = validator.updateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
- 
-     const updatedUser = await User.updateOne(req.body)
-     res.json({msg: 'User updated successfully'})
+ 	
+ 	if(user.partner == true) { //added for partners
+ 		updatePartner(req, res);
+ 		res.json({msg: 'Partner updated successfully'})
+ 	}
+ 	else {
+		const updatedUser = await User.updateOne(req.body)
+     	res.json({msg: 'User updated successfully'})
+ 	}
     }
     catch(error) {
         // We will be handling the error later
@@ -201,9 +214,11 @@ router.post('/', (req, res) => {
 // and as a second parameter the object with the updated partner details 
 
 function updatePartner(req, res) {
-	if(req.body.partner == true){
-		Partner.findOneAndUpdate({_id: req.body._id}, req.body, { new: true }, (err, doc) => {
-		if (!err) { res.redirect('/update/:id'); }
+	const id = req.params.id
+    const partner = await User.findOne({id})
+	if(req.body.partner == true){ //can be removed, already checked up there
+		partner.findOneAndUpdate({id}, req.body, { new: true }, (err, doc) => {
+		if (!err) { res.redirect('/:profile/update'); }
 
 		else {
 			//will handle error later
