@@ -1,5 +1,5 @@
+@@ -1,18 +1,21 @@
 const Joi = require('joi')
-
 module.exports = {
     createValidation: request => {
         const createSchema = {
@@ -13,25 +13,23 @@ module.exports = {
             educationalBackground: joi.string().min(5).required(),
             skills: joi.string().min(5),
             portofolio: joi.string()
+            portofolio: joi.string(),
+            partner: joi.boolean(),
+            admin: joi.boolean()
+
         }
 
         return Joi.validate(request, createSchema)
-    },
-
-    updateValidation: request => {
-        const updateSchema = {
-            firstName: joi.string().min(3).max(20),
-            middleName: joi.string().min(3).max(20),
-            lastName: joi.string().min(3).max(20),
-            age: joi.number().min(18),
-            birthDate: joi.date(),
-            email: joi.string().email(),
+@@ -29,9 +32,11 @@ module.exports = {
             password: joi.string().regex(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/),
-            educationalBackground: joi.string().min(5),		
+            educationalBackground: joi.string().min(5),     
             skills: joi.string().min(5),
             portofolio: joi.string()
+            portofolio: joi.string(),
+            partner: joi.boolean(),
+            admin: joi.boolean()
         }
 
         return Joi.validate(request, updateSchema)
     }, 
-}
+} 
