@@ -2,7 +2,7 @@ const express = require('express');
 const Joi = require('joi');
 const uuid = require('uuid');
 const router = express.Router();
-const Masterclass = require('../../models/Masterclass');
+const masterclasses = require('../../models/Masterclass');
 const mongoose = require('mongoose')
 const validator = require('../../validations/masterclassValidations')
 
@@ -127,5 +127,17 @@ router.post('/', async (req,res) => {
         // We will be handling the error later
         console.log(error)
     }  
+ })
+router.post('/:id/:email/complete',async(req,res)=>{
+     try{
+         const id = req.params.id;
+         const email = req.params.email;
+         const completedMasterClass = await masterclasses.findOne(id);
+         const user =  User.findOne(email); 
+         user.MasterClasses.push(completedMasterClass);
+         res.json('Masterclass has been added');
+     }catch(error){
+
+     }
  })
 module.exports = router;
