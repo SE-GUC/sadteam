@@ -37,7 +37,12 @@ router.post('/',  (req,res) => {
 	 newUser.portofolio = req.body.portofolio;
 	 newUser.partner = req.body.partner;
 	 newUser.admin = req.body.admin;
+
+	 newUser.consultancyAgency = req.body.consultancyAgency;
+	 newUser.consultancyInformation = req.body.consultancyInformation;
+
 	 newUser.reviews = req.body.reviews;
+
 	 
 		 const users = Users.find();	
 		if(users.length==0){

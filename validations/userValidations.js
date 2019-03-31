@@ -15,6 +15,10 @@ module.exports = {
             portofolio: joi.string(),
             partner: joi.boolean(),
             admin: joi.boolean(),
+
+            consultancyAgency: joi.boolean(),
+            consultancyInformation: joi.string()
+
             review: [joi.string()]
 
             
@@ -37,7 +41,10 @@ module.exports = {
             portofolio: joi.string(),
             partner: joi.boolean(),
             admin: joi.boolean(),
-            review: [joi.string()]
+
+            consultancyAgency: joi.boolean(),
+            consultancyInformation: joi.string()
+         review: [joi.string()]
         }
 
         return Joi.validate(request, updateSchema)
