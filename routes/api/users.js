@@ -217,7 +217,7 @@ router.post('/', (req, res) => {
 
 function updatePartner(req, res) {
 	const id = req.params.id
-    const partner = await User.findOne({id})
+    const partner = User.findOne({id})
 	if(req.body.partner == true){ //can be removed, already checked up there
 		partner.findOneAndUpdate({id}, req.body, { new: true }, (err, doc) => {
 		if (!err) { res.redirect('/:profile/update'); }
