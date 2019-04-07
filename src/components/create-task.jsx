@@ -5,7 +5,6 @@ class CreateTask extends React.Component {
   {
     super(props);
     this.state = {
-          tasks: [],
           name: "",
           description: ""
     }
