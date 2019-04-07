@@ -14,9 +14,9 @@ class DeleteTask extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 	
-	handleClick = async post => {
-     axios.delete("http://localhost:3000/api/tasks" + '/' + post.id);
-    const task = this.state.task.filter(p => p.id !== post.id);
+	handleClick = async task => {
+     axios.delete("http://localhost:3000/api/tasks" + '/' + task.id);
+    const task = this.state.task.filter(p => p.id !== task.id);
     this.setState({ task });
 	  render() {
     return (
