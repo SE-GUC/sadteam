@@ -8,7 +8,7 @@ import Email from "./email";
 import ViewProfilePic  from "./viewProfilePicture";
 import Fullname from "./fullName";
 import Skills from "./skills";
-class ProfilePage extends Component {
+class viewProfile extends Component {
   render() {
     return (
       <div>
