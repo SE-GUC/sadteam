@@ -1,5 +1,5 @@
 import React from "react";
-class ViewPage extends React.Component {
+class ViewProfilePic extends React.Component {
   render() {
     return (
       <div>
@@ -8,4 +8,4 @@ class ViewPage extends React.Component {
     );
   }
 }
-export default ViewPage;
+export default ViewProfilePic;
