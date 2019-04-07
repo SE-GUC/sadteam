@@ -3,7 +3,7 @@ class ViewPage extends React.Component {
   render() {
     return (
       <div>
-        <img className="profilePic" src="123.jpg" />
+        <img className="profilePic" src="Imagename.jpg" />
       </div>
     );
   }
