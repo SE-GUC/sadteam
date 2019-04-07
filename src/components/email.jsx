@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../frontPage.css";
 class Email extends Component {
   render() {
     return (
