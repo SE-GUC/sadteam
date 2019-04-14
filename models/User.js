@@ -1,5 +1,7 @@
 //Schema for the user(member) entity/model
 const mongoose = require('mongoose');
+const MasterClass = require('./Masterclass').schema
+
 
 //validation 1
 // the userSchema object and its structure
@@ -40,6 +42,17 @@ var userSchema = new mongoose.Schema({
 	},
 	admin: {
 		type: Boolean
+	},
+
+	consultancyAgency: {
+		type: Boolean
+	},
+	consultancyInformation: {
+		type: [String]
+	}
+	,
+	MasterClasses:{
+		type:[MasterClass]
 	}
 });
 

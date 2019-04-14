@@ -37,7 +37,10 @@ router.post('/',  (req,res) => {
 	 newUser.portofolio = req.body.portofolio;
 	 newUser.partner = req.body.partner;
 	 newUser.admin = req.body.admin;
+	 newUser.consultancyAgency = req.body.consultancyAgency;
+	 newUser.consultancyInformation = req.body.consultancyInformation;
 	 newUser.reviews = req.body.reviews;
+
 	 
 		 const users = Users.find();	
 		if(users.length==0){
@@ -99,16 +102,27 @@ router.put('/:email/update', async (req,res) => {
         console.log(error)
     }  
  })
+
+
+
+// -- updatePartner if user is a partner --bishoy
+
  router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id
      const user = await User.findOne({id})
-     if(!user) return res.status(404).send({error: 'User does not exist'})
+     if(!user) return res.status(404).send({error: 'User does not exist'})	
      const isValidated = validator.updateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
- 
-     const updatedUser = await User.updateOne(req.body)
-     res.json({msg: 'User updated successfully'})
+ 	
+ 	if(user.partner == true) { //added for partners
+ 		updatePartner(req, res);
+ 		res.json({msg: 'Partner updated successfully'})
+ 	}
+ 	else {
+		const updatedUser = await User.updateOne(req.body)
+     	res.json({msg: 'User updated successfully'})
+ 	}
     }
     catch(error) {
         // We will be handling the error later
@@ -175,6 +189,50 @@ router.delete('/:id', async (req,res) => {
     }  
  })
 
+
+// -- Bisho Update Partner UserStory
+
+// -- "Updating" Partner info 
+
+/*
+router.get('/:id', (req,res) => {
+	Partner.findById(req.params.id, (err, doc) =>{
+
+	});
+
+});
+*/
+
+/*
+router.post('/', (req, res) => {
+	if (req.body._id == '')
+		insertPartner(req, res);
+		else
+			updatePartner(req, res);
+});*/
+
+
+//findOneAndUpdate method has as a first parameter the filtering condition (id) 
+// and as a second parameter the object with the updated partner details 
+
+function updatePartner(req, res) {
+	const id = req.params.id
+    const partner = User.findOne({id})
+	if(req.body.partner == true){ //can be removed, already checked up there
+		partner.findOneAndUpdate({id}, req.body, { new: true }, (err, doc) => {
+		if (!err) { res.redirect('/:profile/update'); }
+
+		else {
+			//will handle error later
+			console.log('Error during update: ' + err); 
+
+		}
+	});
+	}
+	else{
+		console.log('sorry you are not a partner');
+	}	
+} 
 
  router.put('/:id', async (req,res) => {
     try {
