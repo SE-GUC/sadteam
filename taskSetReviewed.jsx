@@ -11,10 +11,7 @@ class taskSetReviewed extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
-        axios.put("http://localhost:3000/api/tasks/:id", {
-        id: this.state.id,
-        Reviewed: true
-        })
+        axios.put("http://localhost:3000/api/tasks/${id}", {"reviewed": true})
     }
     render() {
         return (
