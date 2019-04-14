@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-class MasterClassess extends Component {
+class MasterClassessLink extends Component {
   render() {
     return (
       <div>
@@ -11,4 +11,4 @@ class MasterClassess extends Component {
   }
 }
 
-export default MasterClassess;
+export default MasterClassessLink;
