@@ -6,16 +6,14 @@ import Tasks from "./tasks";
 import ProfilePic from "./uploadProfilePic";
 import Fullname from "./fullName";
 import Skills from "./skills";
+import MasterClassessLink from "./masterclassess";
 import RecommendTask from "./recommendTaskbutton";
 import Axios from "axios";
 class ProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName:null,
-      middleName:null,
-      lastName:null,
-      FullName: firstName+" "+" "+middleName+" "+lastName+" ",
+      FullName: "Ahmed",
       email: props.email, // it should be passed from the login component,
       tasks: [],
       user: null,
@@ -41,6 +39,7 @@ class ProfilePage extends Component {
     this.getUserfromDb();
     this.getMasterClassesFromDb();
     this.getTasksfromDb();
+    this.setState({FullName})
   }
   render() {
     const { FullName, email, MasterClassess, tasks, user } = this.state;
@@ -51,7 +50,7 @@ class ProfilePage extends Component {
         <Email email={email} />
         <Skills />
         <Tasks />
-        <MasterClassess masterclassess={MasterClassess} />
+        <MasterClassessLink masterclassess={MasterClassess} />
         <Edit />
         <p />
         <RecommendTask email={email} />
