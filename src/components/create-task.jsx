@@ -26,9 +26,10 @@ class CreateTask extends React.Component {
          <br></br>
           <button onClick={this.handleClick}>Submit Description For Review</button>   
         </div>
-    );
-  }
+
+    )
+    }
 
 }
 
-export default CreateTask;
+export default CreateTask

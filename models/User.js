@@ -53,6 +53,9 @@ var userSchema = new mongoose.Schema({
 	,
 	MasterClasses:{
 		type:[MasterClass]
+	},
+	reviews:{
+		type:[String]
 	}
 });
 
