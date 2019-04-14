@@ -42,5 +42,5 @@ render() {
             </div>
         )
     }
-
+}
 export default ViewTasks;
