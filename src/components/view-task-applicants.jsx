@@ -16,7 +16,7 @@ constructor(props)
    }
  //viewing all tasks
  async componentWillMount() {
-   await axios.get("http://localhost:3000/api/tasks/:id").then(res => this.setState({applicants: res.data.data})).catch(err => console.log(err))
+   await axios.get("http://localhost:3000/api/tasks/${id}").then(res => this.setState({applicants: res.data.data})).catch(err => console.log(err))
  }
 render() {
        return (
