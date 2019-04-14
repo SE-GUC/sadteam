@@ -11,7 +11,7 @@ class userAddReview extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
-        axios.put("http://localhost:3000/api/users/:id", {
+        axios.put("http://localhost:3000/api/users//${id}", {
         reviewText: this.state.reviewText
         })
     }
