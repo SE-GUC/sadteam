@@ -8,7 +8,7 @@ class RecommendTask extends React.Component {
   }
   getRecommendedTasks = () => {
     var RecommendTaskUrl =
-      "api/users/records/" +
+      "http://localhost:8080/api/users/records/" +
       this.state.email +
       "/recommendations";
     window.location.replace(RecommendTaskUrl);
