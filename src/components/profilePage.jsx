@@ -21,7 +21,7 @@ class ProfilePage extends Component {
     };
   }
   getTasksfromDb() {
-    Axios.get(""api/tasks/")
+    Axios.get("http://localhost:8080/api/tasks/")
       .then(res => res)
       .then(data => this.setState({ tasks: data }));
   }
