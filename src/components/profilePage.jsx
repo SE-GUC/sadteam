@@ -26,12 +26,12 @@ class ProfilePage extends Component {
       .then(data => this.setState({ tasks: data }));
   }
   getUserfromDb() {
-    Axios.get("api/users/records/" + this.state.email)
+    Axios.get("http://localhost:8080/api/users/records/" + this.state.email)
       .then(res => res)
       .then(data => this.setState({ user: data.user }));
   }
   getMasterClassesFromDb() {
-    Axios.get("api/masterclasses")
+    Axios.get("http://localhost:8080/api/masterclasses")
       .then(res => res)
       .then(data => this.setState({ masterclassess: data.masterclassess }));
   }
