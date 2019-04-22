@@ -1,5 +1,5 @@
 
-const Joi = require('joi')
+const joi = require('joi')
 
 module.exports = {
     createValidation: request => {
@@ -10,7 +10,8 @@ module.exports = {
             age: joi.number().min(18),
             birthDate: joi.date().required(),
             email: joi.string().email().required(),
-            password: joi.string().regex(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/).required(),
+           // password: joi.string().regex(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/).required(),
+            password: joi.string(),
             educationalBackground: joi.string().min(5).required(),
             skills: joi.string().min(5),
             portofolio: joi.string(),
@@ -23,7 +24,7 @@ module.exports = {
             
         }
 
-        return Joi.validate(request, createSchema)
+        return joi.validate(request, createSchema)
     },
 
     updateValidation: request => {
@@ -45,6 +46,6 @@ module.exports = {
             review: [joi.string()]
         }
 
-        return Joi.validate(request, updateSchema)
+        return joi.validate(request, updateSchema)
     }, 
 }

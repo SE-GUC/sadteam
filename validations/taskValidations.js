@@ -7,7 +7,8 @@ module.exports = {
             description: Joi.string().min(3).max(100).required(),
             applicants: Joi.array(),
             skillsRequired: Joi.array(),
-            reviewed: Joi.boolean().default(False)
+            currentState: Joi.string(),
+            reviewed: Joi.boolean(),
         }
 
         return Joi.validate(request, createSchema)
@@ -19,7 +20,8 @@ module.exports = {
             description: Joi.string().min(3).max(100),
             applicants: Joi.array(),
             skillsRequired: Joi.array(),
-            reviewed: Joi.boolean()
+            currentState: Joi.string(),
+            reviewed: Joi.boolean(),
         }
 
         return Joi.validate(request, updateSchema)

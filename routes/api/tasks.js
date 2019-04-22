@@ -24,7 +24,7 @@ router.get('/', async (req,res) => {
 
 // Update current state
 
-router.put('/updateCurrentState/:id', (req, res) => {
+router.put('/updateCurrentState/:_id', (req, res) => {
     try{ 
      const id = req.params.id 
      const task =  Task.findOne({id})
@@ -32,7 +32,7 @@ router.put('/updateCurrentState/:id', (req, res) => {
      const isValidated = validator.updateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
      const updatedTask =  Task.updateOne(req.body)
-     res.json({msg: 'Book updated successfully'})
+     res.json({msg: 'Task updated successfully'})
    }
     catch(error) {
        console.log(error)
@@ -41,7 +41,7 @@ router.put('/updateCurrentState/:id', (req, res) => {
    })
 
    // Assign a Consultancy
-router.put('/assignConsultancy/:id', (req, res) => {
+router.put('/assignConsultancy/:_id', (req, res) => {
     try{ 
      const id = req.params.id 
 
@@ -59,7 +59,7 @@ router.put('/assignConsultancy/:id', (req, res) => {
    })
   
 
-router.post('/joi', (req, res) => {
+/*router.post('/joi', (req, res) => {
     const taskName = req.body.taskName
 	const taskDescription = req.body.taskDescription;
 
@@ -80,14 +80,7 @@ router.post('/joi', (req, res) => {
     return res.json({ data: newTask });
 });
 
-app.put('/api/tasks/:id', (req, res) => {
-    const taskID = req.params.id 
-    const updatedName = req.body.name
-    const task = tasks.find(task => task.id === taskID)
-    task.name = updatedName;
-    res.send(tasks)
-});
-
+*/
 
 
 router.post('/', async (req,res) => {
@@ -106,11 +99,11 @@ router.post('/', async (req,res) => {
 router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id
-     const task = await Task.findOne({id})
+     const task = await Task.findById(id)
      if(!task) return res.status(404).send({error: 'Task does not exist'})
      const isValidated = validator.updateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const updatedTask = await Task.updateOne(req.body)
+     const updatedTask = await Task.findOneAndUpdate({_id:id},{name:req.body.name,description:req.body.description,currentState:req.body.currentState,reviewed:req.body.reviewed})
      res.json({msg: 'Task updated successfully'})
     }
     catch(error) {
